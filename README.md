@@ -2,7 +2,7 @@
 The test will be made of 4 exercise.
 PHP required
 you can use this code to check first 3 excersice: vendor/bin/phpunit ./tests/Unit/WhitezipTest.php
-Make various commits, and call a branch as test/{name}-{date}
+Make various commits, and call a branch as test/{name}-{lastName}
 The Controller for the test is called testController.php
 The unit test is called WhitezipTest.php (Don't modify this file)
 <ul>

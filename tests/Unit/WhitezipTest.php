@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class WhitezipTest extends TestCase
 {
+
     public function __construct(string $name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
