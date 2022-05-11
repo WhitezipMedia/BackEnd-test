@@ -3,6 +3,8 @@ The test will be made of 4 exercise.
 PHP required
 you can use this code to check first 3 excersice: vendor/bin/phpunit ./tests/Unit/WhitezipTest.php
 Make various commits, and call a branch as test/{name}-{date}
+The Controller for the test is called testController.php
+The unit test is called WhitezipTest.php (Don't modify this file)
 <ul>
 <li>Get the N first Fibonacci numbers</l1>
 <li>Check if is a Leap Year</l1>
