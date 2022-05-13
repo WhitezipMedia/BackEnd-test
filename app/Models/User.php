@@ -41,4 +41,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function employees(): belongsToMany
+    {
+        return $this->belongsToMany(
+            User::class,
+            'relation',
+            'boss_id',
+            'employee_id'
+        );
+    }
+
+    public function bosses(): belongsToMany
+    {
+        return $this->belongsToMany(
+            'relation',
+            'employee_id',
+            'boss_id'
+        );
+    }
+
+    public function jobPosition()
+    {
+        return $this->hasOne(JobPosition::class);
+    }
+
 }
