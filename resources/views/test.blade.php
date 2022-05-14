@@ -9,6 +9,9 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
     <!-- Styles -->
     <style>
         /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -24,130 +27,354 @@
     </style>
   </head>
   <body class="antialiased">
-    <div class="relative items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-100 sm:items-center py-4 sm:pt-0">
 
-      <p style="width: 100%; clear: both; font-weight: bold;">
-        Is {{ date('Y') }} a leap year? 
-        <br />
-        <span style="font-weight: normal;">{{ $leapYear ? 'Yes' : 'No' }}</span>
-      </p>
+    @if(session()->has('success'))
+      <div class="alert alert-success">
+          {{ session()->get('success') }}
+      </div>
+    @endif
 
-      <p style="width: 100%; clear: both; font-weight: bold;">
-        First 30 FibonnaciNumbers: 
-        <br />
-        <span style="font-weight: normal;">{{ implode(', ', $fibonnaciNumbers) }}</span>
-      </p>
+    @if($errors->any())
+      <div class="alert alert-danger">
+        Please check form errors below
+      </div>
+    @endif
 
-      <p style="width: 100%; clear: both; font-weight: bold;">
-        All Users:
-      </p>
+    <div class="container">
 
-      <table class="table">
+      <div class="card card-default">
+
+        <div class="card-header">Joaquin Test</div>
+
+        <div class="card-body">
+
+          <div class="relative items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-100 sm:items-center py-4 sm:pt-0">
+
+            <p style="width: 100%; clear: both; font-weight: bold;">
+              Is {{ date('Y') }} a leap year? 
+              <br />
+              <span style="font-weight: normal;">{{ $leapYear ? 'Yes' : 'No' }}</span>
+            </p>
+
+            <p style="width: 100%; clear: both; font-weight: bold;">
+              First 30 FibonnaciNumbers: 
+              <br />
+              <span style="font-weight: normal;">{{ implode(', ', $fibonnaciNumbers) }}</span>
+            </p>
+
+            <p style="width: 100%; clear: both; font-weight: bold;">
+              All Users:
+            </p>
+
+            <table class="table">
+                
+                <thead>
+
+                    <th>Name</th>
+
+                    <th>Last Name</th>
+
+                    <th>Email</th>
+
+                </thead>
+
+                <tbody>
+
+                  @foreach($allUsers as $user)
+
+                  <tr>
+
+                    <td>{{ $user->name }}</td>
+
+                    <td>{{ $user->last_name }}</td>
+
+                    <td>{{ $user->email }}</td>
+
+                  </tr>
+
+                  @endforeach
+
+                </tbody>
+
+            </table>
+
+            <p style="width: 100%; clear: both; font-weight: bold;">
+              Users job position:
+            </p>
+
+            <table class="table">
+                
+              <thead>
+
+                  <th>Name</th>
+
+                  <th>Last Name</th>
+
+                  <th>Job Name</th>
+
+              </thead>
+
+              <tbody>
+
+                @foreach($userJobPositions as $userJobPosition)
+
+                <tr>
+
+                  <td>{{ $userJobPosition->name }}
+
+                  <td>{{ $userJobPosition->last_name }}
+
+                  <td>{{ ucfirst($userJobPosition->job_name) }}
+
+                </tr>
+
+                @endforeach
+
+              </tbody>
+
+            </table>
+
+            <p style="width: 100%; clear: both; font-weight: bold;">Boss Employee History:</p>
+
+            <table class="table">
+                
+              <thead>
+
+                  <th>Boss Name</th>
+
+                  <th>Boss Last Name</th>
+
+                  <th>Employee Name</th>
+
+                  <th>Employee Last Name</th>
+
+              </thead>
+
+              <tbody>
+
+                @foreach($bossEmployeeHistory as $history)
+
+                <tr>
+
+                  <td>{{ $history->boss_name }}</td>
+
+                  <td>{{ $history->boss_last_name }}</td>
+
+                  <td>{{ $history->employee_name }}</td>
+
+                  <td>{{ $history->employee_last_name }}</td>
+
+                </tr>
+
+                @endforeach
+
+              </tbody>
+
+            </table>
+
+            <p style="width: 100%; clear: both; font-weight: bold;">Create Users:</p>
+
+            @if($errors->any())
+
+              <div class="alert alert-danger">
           
-          <thead>
-
-              <th>Name</th>
-
-              <th>Last Name</th>
-
-              <th>Email</th>
-
-          </thead>
-
-          <tbody>
-
-            @foreach($allUsers as $user)
-
-            <tr>
-
-              <td>{{ $user->name }}</td>
-
-              <td>{{ $user->last_name }}</td>
-
-              <td>{{ $user->email }}</td>
-
-            </tr>
-
-            @endforeach
-
-          </tbody>
-
-      </table>
-
-      <p style="width: 100%; clear: both; font-weight: bold;">
-        Users job position:
-      </p>
-
-      <table class="table">
+              <ul class="list-group">
           
-        <thead>
-
-            <th>Name</th>
-
-            <th>Last Name</th>
-
-            <th>Job Name</th>
-
-        </thead>
-
-        <tbody>
-
-          @foreach($userJobPositions as $userJobPosition)
-
-          <tr>
-
-            <td>{{ $userJobPosition->name }}
-
-            <td>{{ $userJobPosition->last_name }}
-
-            <td>{{ $userJobPosition->job_name }}
-
-          </tr>
-
-          @endforeach
-
-        </tbody>
-
-      </table>
-
-      <p style="width: 100%; clear: both; font-weight: bold;">Boss Employee History:</p>
-
-      <table class="table">
+                  @foreach($errors->all() as $error)
           
-        <thead>
+                  <li class="list-group-item text-danger">
+          
+                      {{ $error }}
+          
+                  </li>
+          
+                  @endforeach
+          
+              </ul>
+          
+              </div>
+          
+            @endif
 
-            <th>Boss Name</th>
+            <form action="{{ route('store-user') }}" method="POST" enctype="multipart/form-data">
 
-            <th>Boss Last Name</th>
+              @csrf
 
-            <th>Employee Name</th>
+              <div class="form-group">
 
-            <th>Employee Last Name</th>
+                <label for="name">Name</label>
 
-        </thead>
+                <input  
+                  type="text" 
+                  class="form-control" 
+                  name="name" 
+                  id="name"
+                  value="">
 
-        <tbody>
+                <label for="last_name">Last Name</label>
 
-          @foreach($bossEmployeeHistory as $history)
+                <input  
+                  type="text" 
+                  class="form-control" 
+                  name="last_name" 
+                  id="last_name"
+                  value="">
 
-          <tr>
+                <label for="email">Email</label>
 
-            <td>{{ $history->boss_name }}</td>
+                <input  
+                  type="email" 
+                  class="form-control" 
+                  name="email" 
+                  id="email"
+                  value="">
 
-            <td>{{ $history->boss_last_name }}</td>
+                <label for="password">Password</label>
 
-            <td>{{ $history->employee_name }}</td>
+                <input  
+                  type="password" 
+                  class="form-control" 
+                  name="password" 
+                  id="password"
+                  value="">
 
-            <td>{{ $history->employee_last_name }}</td>
+                  <label for="job">Job Position</label>
 
-          </tr>
+                  <select name="job" id="job" class="form-control">
 
-          @endforeach
+                    @foreach($jobs as $job)
 
-        </tbody>
+                    <option value="{{ $job->id }}">
+  
+                      {{ ucfirst($job->name) }}
+  
+                    </option>
+  
+                    @endforeach
+  
+                  </select>
+  
+              </div>
 
-      </table>
+              <div class="form-group">
+
+                <label for="user_type">User Type</label>
+
+                <select name="user_type" id="user_type" class="form-control user_type">
+
+                  <option value="boss" selected>Boss</option>
+
+                  <option value="employee">Employee</option>
+
+                </select>
+
+              </div>
+
+              <div style="display: none;" class="form-group boss-list">
+
+                <label for="boss_list">Please select a boss from Boss List</label>
+
+                <select name="boss_list" id="boss_list" class="form-control">
+
+                  <option disabled selected value> -- please select your boss -- </option>
+
+                  @foreach($allUsers as $user)
+
+                  @if ('employee' === $user->type)
+
+                    @continue
+
+                  @endif
+
+                  <option value="{{ $user->id }}">
+
+                    {{ $user->name . ' ' . $user->last_name }}
+
+                  </option>
+
+                  @endforeach
+
+                </select>
+
+              </div>
+
+              <div class="form-group employee-list">
+
+                <label for="employee_list">Employee List</label>
+
+                <select name="employee_list[]" id="employee_list" class="form-control employee-selector" multiple>
+
+                  {{ $counter = 0; }}
+
+                  @foreach($allUsers as $user)
+
+                  @if ('boss' === $user->type)
+
+                    @continue
+
+                  @endif
+
+                  <option value="{{ $user->id }}">
+                    {{ $user->name . ' ' . $user->last_name }}
+                  </option>
+
+                  {{ $counter++; }}
+
+                  @endforeach
+
+                </select>
+
+              </div>
+
+              <br />
+
+              <div class="form-group">
+
+                  <button 
+                    type="submit"
+                    class="btn btn-info btn-sm">
+                    Go
+                </button>
+
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
 
     </div>
+
   </body>
 </html>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+  jQuery(document).ready(function() {
+      jQuery('.employee-selector').select2({
+        placeholder: 'Please select your employee(s)'
+      });
+
+      jQuery('.user_type').on('change', function () {
+        if ('boss' === this.value) {
+
+          jQuery('.employee-list').show();
+
+          jQuery('.boss-list').hide();
+
+        } else if ('employee' === this.value) {
+
+          jQuery('.employee-list').hide();
+
+          jQuery('.boss-list').show();
+        }
+      });
+  })
+</script>

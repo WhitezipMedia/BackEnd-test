@@ -17,6 +17,12 @@ class JobPosition extends Model
         return $this->hasMany(User::class);
     }
 
+    public function getJobs() {
+        return DB::table('job_position')
+            ->select('job_position.id', 'job_position.name')
+            ->get();
+    }
+
     public function getUserJobPosition() {
         return DB::table('job_position')
             ->join('users', 'job_position.id', '=', 'users.job_position_id')

@@ -12,6 +12,16 @@ class Relation extends Model
 
     protected $table = 'relation';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'boss_id',
+        'employee_id'
+    ];
+
     public function getBossEmployeeHistory() {
         return DB::table('relation')
             ->join('users as employees', 'employees.id', '=', 'relation.employee_id')

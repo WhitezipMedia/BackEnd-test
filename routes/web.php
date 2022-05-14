@@ -18,3 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', [App\Http\Controllers\testController::class, 'index'])->name('test');
+
+Route::resource('test', App\Http\Controllers\testController::class);
+
+Route::post('/test', [App\Http\Controllers\testController::class, 'store'])->name('store-user');
