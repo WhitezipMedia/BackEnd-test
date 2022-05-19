@@ -20,8 +20,8 @@ class testController extends Controller
      * @param int $year
      * @return bool
      */
-    public function isLeapYear($year) {
-        $result = true;
+    public function isLeapYear($year) {        
+        $result = date('L', mktime(0, 0, 0, 1, 1, $year));
         return $result;
     }
 
